@@ -11,7 +11,7 @@ class TreeMap extends Component {
 
   render() {
     return (
-      <div id="treemap" ref={this.treemap}></div>
+      <div id="treemap" style={{ height: "500px" }} ref={this.treemap}></div>
     )
   }
 
@@ -22,6 +22,7 @@ class TreeMap extends Component {
       .type("tree_map")
       .id("name")
       .size("budget")
+      .resize(true)
       .mouse({
         click: event
       })
@@ -41,9 +42,13 @@ class App extends Component {
   }
   render() {
     return (
-      <div>
-        <TreeMap event={this.eventHandler}/>
-        <p>{JSON.stringify(this.state.selected)}</p>
+      <div className="container">
+        <div className="row">
+          <div className="col">
+            <TreeMap event={this.eventHandler}/>
+            <p>{JSON.stringify(this.state.selected)}</p>
+          </div>
+        </div>
       </div>
     );
   }
