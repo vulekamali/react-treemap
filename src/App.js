@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import d3plus;
 import data from "./data/test.json";
 
 class TreeMap extends Component {
@@ -16,7 +17,7 @@ class TreeMap extends Component {
   }
 
   initTreemap(data, event) {
-    new window.d3plus.Treemap()
+    new d3plus.Treemap()
       .layoutPadding(0)
       .data(data)
       .groupBy("name")
