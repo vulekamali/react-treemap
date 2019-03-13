@@ -11,26 +11,21 @@ class TreeMap extends Component {
 
   render() {
     return (
-      <div ref={this.treemap} style={{ height: "500px", width: "1000px" }}></div>
+      <div id="viz" ref={this.treemap} style={{ height: "500px", width: "1000px" }}></div>
     )
   }
 
   initTreemap(data, event) {
-    new window.d3plus.Treemap()
-      .layoutPadding(0)
-      .data(data)
-      .groupBy("name")
-      .sort((a,b) => a.budget - b.budget)
-      .shapeConfig({
-        labelConfig: {
-          verticalAlign: "top"
-        }
-      })
-      .label((d) => `${d.name} - R${d.budget} Billion`)
-      .select(this.treemap.current)
-      .on("click",event)
-      .sum("budget")
-      .render();
+    var visualization = window.d3plus.viz()
+      .container("#viz")  
+      .data(data)  
+      .type("tree_map")   
+      .id("name")         
+      .size("budget")      
+      .mouse({
+        click: this.event
+      })       // passing only Boolean value will toggle all mouse events
+      .draw() 
   }
 
   componentDidMount() {
@@ -54,7 +49,8 @@ class App extends Component {
   }
 
   eventHandler(e) {
-    this.setState({ selected: e });
+    const { name, budget } = e;
+    this.setState({ selected: { name, budget }});
   }
 }
 
