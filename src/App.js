@@ -11,20 +11,20 @@ class TreeMap extends Component {
 
   render() {
     return (
-      <div id="viz" ref={this.treemap} style={{ height: "500px", width: "1000px" }}></div>
+      <div id="treemap" ref={this.treemap}></div>
     )
   }
 
   initTreemap(data, event) {
-    var visualization = window.d3plus.viz()
-      .container("#viz")  
-      .data(data)  
-      .type("tree_map")   
-      .id("name")         
-      .size("budget")      
+    window.d3plus.viz()
+      .container("#treemap")
+      .data(data)
+      .type("tree_map")
+      .id("name")
+      .size("budget")
       .mouse({
-        click: this.event
-      })       // passing only Boolean value will toggle all mouse events
+        click: event
+      })
       .draw() 
   }
 
